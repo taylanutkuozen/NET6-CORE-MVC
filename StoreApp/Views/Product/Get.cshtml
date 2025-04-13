@@ -1,0 +1,31 @@
+@*Layout="_Layout"; ViewStart kullandık ve ayrı ayrı belirtmeye gerek kalmadı.*@
+@*@model StoreApp.Models.Product bu ifadeyi _ViewImports kısmından alabilir artık.*@
+<div class="row">
+    <div class="col-md-12">
+        <div class="text-center">
+            <h6 class="display-6">
+                @Model.ProductName
+            </h6>
+            <img class="img-fluid shadow rounded-3 my-3" src="@Model?.ImageUrl" alt="@Model.ProductName"/>
+            <p class="lead text-danger">@Model.ProductPrice.ToString("c")</p>
+        </div>
+    </div>
+</div>
+
+<p>@Model.ProductPrice</p>
+<div class="btn-group">
+    <a class="btn btn-primary" asp-controller="Home" asp-action="Index">
+        <i class="fa-solid fa-house"></i>
+        Home
+        </a>
+    <a class="btn btn-outline-primary" asp-controller="Product" asp-action="Index">
+        <i class="fa-solid fa-list"></i>
+        Products
+        </a>
+</div>
+<br/>
+section Header{
+    <div>
+        Header for only Get
+    </div>
+}@*Burası sadece Get.cshtml de görünecektir ve Index.cshtml içerisinde görünmeyecektir.*@

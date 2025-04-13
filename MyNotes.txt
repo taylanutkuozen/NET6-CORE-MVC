@@ -1,0 +1,21 @@
+MVC, mimarisel bir tasarim desenidir.
+View(Razor/HTML)---PageModel(C#)---Model(C#)<--->SQL[Model-View-View-Model(MVVM)deseni]
+Controller ihtiyaci olmadan Razor ile bir sayfa yapacagiz. 
+MVC'nin endpoint yapisini RazorPage esneklik getirecegiz.
+-----------
+Controller yapisi olmadan bir function direktifiyle bir PageModel ile sayfa iliskendirerek uygulamayi ayaga kaldirabilirim. Routing mekanizmalarini gelistirir iken Page direktifi ile hizlica uygulama yapmamiza izin veren bir yapidir.
+Controller-Action yapilariyla yapabildigimiz herseyi RazorPage ile yapabiliriz.
+-----------
+Bir cshtml uzantili dosyanin RazorPage oldugunu gostermek icin "@page" komutunu kullaniriz.
+Pages dizini altinda bir Shared dizini olusturup bir Layout hazirlayip kullanabiliriz. Yada mevcut sayfa tasarimindan cikmadan Layout kullanabiliriz.
+@page "/endpoint_adresi_ver"=> @page "/getintouch"
+Navbar icerisinde controllerdan farkli olarak asp-controller yerine asp-page komutunu kullaniriz.
+-------
+Auto Rename Tag Extension yuklendi. HTML acilis kapanis taglerini duzenler.
+------------
+Kurulu Extensionlari gormek icin arama cubuguna @installed yazabiliriz.
+---------------------------
+Page Model=Pages dizinine odaklaniyoruz. Controller yapisi olmayan Model-View-View-Model yapisi.
+--------------------
+Eger Visual Studio icerisinde Page dizinine yeni bir dosya eklersek-->Add-Razor Page Empty-->.cshtml.cs adli bir dosya daha eklenir. PageModel inherit edilir. 
+Sadece .cshtml uzantili dosyayi kullanmak istiyorsak ve dinamik bir yapi kuracaksak @functions { } icerisinde belirtiriz.

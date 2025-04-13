@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link asp-append-version="true" rel="stylesheet" href="~/lib/bootstrap/css/bootstrap.min.css" />
+        <link asp-append-version="true" rel="stylesheet" href="~/css/site.css" />
+        <link asp-append-version="true" rel="stylesheet" href="~/lib/font-awesome/css/all.css" />
+    </head>
+<body>
+    <script src="https://localhost:5135/aspnetcore-browser-refresh.js"></script>
+    <script src="/_framework/aspnetcore-browser-refresh.js"></script>
+    <header>
+        @*StoreApp : Header*@
+        <partial name="_Navbar"/>
+        @RenderSection("Header",required:false)
+    </header>
+    <div class="container">
+    <main role="main" class="pb-3"> @*pb-3 altında kalan ifadelerle arasını biraz açacak şekilde işlem yap.*@
+        @RenderBody()
+    </main>
+    </div>
+    <footer>
+        @RenderSection("Footer",required:false)
+        Footer
+    </footer>
+    <script asp-append-version="true" src="~/lib/jquery/jquery.min.js"></script>
+    <script asp-append-version="true" src="~/lib/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script asp-append-version="true" src="~/lib/js/site.js"></script>
+    <script asp-append-version="true" src="~/lib/font-awesome/js/all.min.js"></script>
+    @await RenderSectionAsync("Scripts",required:false)
+</body>
+</html>

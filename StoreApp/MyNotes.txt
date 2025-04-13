@@ -1,0 +1,266 @@
+https://www.btkakademi.gov.tr/portal/course/asp-net-core-mvc-25318 = URL/URI/Endpoint ==> Request
+https=Protokol
+www.btkakademi.gov.tr=Domain Name
+/portal/course/asp-net-core-mvc-25318=path
+-----------------------------------
+Client--(Request)-->Server (Create,Update,Delete)
+Client<--(Response)--Server (Get)
+Bir Request'in;
+POST=Bir verb cümleciği, 
+Content Length:5(Header--Meta bilgilerin tanımlandığı alan)
+Veriyi tutan bir yer=Hello
+Bir Response'un:
+201-->Http Status Code
+Content Type:text(Meta bilgiler header bölümünde yer alır.)
+Her zaman bir Body olmak zorunda değildir. Ancak olabilir(Hello)
+Stateless=Server'a bir Request geldiğinde cevap dönüyor. Sonrasında Server Client'ı tanımak zorunda değil ve tanımayabilir.(Durumsuzluk)
+Request Yapısı:
+verb=Sunucuda yapmak istediğimiz eylem ile ilgili bilgi vermektedir.[Get=Kaynak isteme,Post=Kaynak oluşturma,put=Kaynak güncelleme,Patch=Kısmi kaynak güncellemesi,Delete=Kaynak Silme]
+headers=API geliştirirken biraz daha önemli olacaktır.[Content Type=içeriğin formatı,Content Length=içeriğin boyutu, Authorization=isteği yapanın kimliği]
+content=Requesti gerçekleştirmeye yardımcı olmak için bilgi içeren yer. [Request ile ilgili içerik:HTML,CSS,JavaScript,XML,JSON, text, binary ve blobs common(.jpg gibi) olabilir.]
+Response Yapısı:
+StatusCode=Operasyon Durumları[100-199=Bilgi,information,200-299=Başarı,Success,300-399=Yeniden yönlendirme,redirection,400-499=Client errors, istemci hataları,500-599=sunucu hataları,server errors]
+headers=response'u tanımlayacak meta bilgiler
+content=HTML,CSS, JavaScript, XML, JSON, Binary ve blobs common(.jpg), API'lerin kendi türleri.
+PIPELINE:(İş hat'tı)
+Request-->ExceptionHandler(Hata varsa response döner.)-->HSTS-->HttpsRedirection-->StaticFiles-->Routing-->CORS-->Authentication-->Authorization-->Custom Middlewares{Custom1-->Custom ...}-->Endpoint
+Response<--ExceptionHandler<--HSTS<--HttpsRedirection<--StaticFiles<--Routing<--CORS<--Authentication<--Authorization<--Custom Middlewares{Custom1<--Custom..}<--Endpoint
+Pipeline içerisinde hepsi olması şart değildir.
+-------------------
+Modern .NET Stack:
+Extensions
+-->Logging=Günlükler yazılım geliştirirken oldukça önemlidir. Yazılımda neler olup bittiğini anlarız.
+-->Configuration=.NET'te gerekli middlewareler kullanılırken,gerek kütüphane kurumları gerçekleştirilirken kullanırız.
+-->Options=Gerek kütüphaneler gerek middlewareler opsiyonel bazı özellikler sağlar. Lambda fonksiyonlarla birlikte kullanırız.
+-->FileProvider
+-->Dependency Injection=Container yapısı. Bağımlılık enjeksiyonunu eğitim kapsamında öğreneceğiz.
+Servers
+-->Kestrel=Default olarak gelmektedir.
+-->IIS=Internet information server
+Middleware
+-->Routing
+-->Compression
+-->Security
+-->Session
+-->Localization
+-->Health Checks
+-->Caching
+-->...(Cooking etc.)
+Web UI
+-->MVC
+-->Razor Pages
+//SPA=Single Page Application(Angular,React,JavaScript)-->API'ler ile.
+Services
+-->Http APIs
+//SignalR=Http protokolünde sürekli requestlerin gelmesi responseların gitmesi gibi bir durum var. Bu durumun sürekli olması istendiğinde oldukça maliyetli oluyor. Sunucu ve istemci arasında neler olduğu dinlenebilir ise maliyeti düşürebiliriz. Bu probleme çözüm oluyor.
+//gRPC=Uzak process'leri çağırmak için protokolden bağımsız bir şekilde haberleşme yapılmasını sağlıyor.
+--------------------------------------
+dotnet Komut Seti
+PowerShell üzerinde ilgili klasörde çalışmaları yapmak gereklidir.
+dotnet --version=Versiyon bilgisini vermektedir.
+dotnet --list-sdks=SDK listesini verir.
+dotnet --list-runtimes=Runtime listesini vermektedir.
+[<...>]=Eğer küçüktür büyüktür var ise terminalde zorunlu alan olduğunu göstermektedir.
+dotnet new list=proje şablonlarının bir listesini verir.
+[C#],F#-->default olarak tanımlanmış dil=C#
+----------------------------------------------
+Çalışma Ortamının Düzenlenmesi
+PowerShell üzerinde ilgili klasörde çalışmaları yapıldı.
+code --version=Code versiyonunu vermektedir.
+code . --> ilgili klasör üzerinde Visual Studio Code açılacaktır.
+Visual Studio Code için sol alt köşede settings butonunda Extensions yapabiliyoruz.
+Profile kısmından bir create profile yapıyoruz.
+Extensions'a giriyoruz.
+İlk önce proje için template'i terminalde bildireceğiz.
+dotnet new mvc -f net7.0 -o Basics=Framework 7 olan Basics adında bir klasöre output ver.
+Basics klasörüne gidiyoruz(cd komutu ile)
+dotnet build=bu komut projeyi derlemektedir.
+dotnet run=bu komut projeyi çalıştırmaktadır.
+Ctrl+C=uygulama çalıştırmasını durdurduk.
+--------------------------
+MVC
+Model=Problemimizi tanımlar. Product ile çalışıyorsak product nesnesi, employee nesnesi ile çalışıyorsak employee nesnesi. Model controller ve view'dan bağımsızdır. Sorumlulukların ayrılması.
+View=Görünüm ile ilgili çalışmalar.
+Controller=Denetleme ile ilgili çalışmalar.
+Coding By Convention=İsme bağlı kodlama(ProductController-Product.cs{Model}-Product{Detail.cshtml,List.cshtml-->iki adet action'a göre tanımlanır.})
+-------------------------
+Endpoint Yapısını Anlamak
+Örnek Endpoint=localhost:7226/controller/action/id
+controller=First Segment-->Default
+action=Second Segment-->Default
+id=Third Segment-->Varsayılan bir değer atamaktan ziyade ilgili parametreyi opsiyonel hale getirilecek.
+------------------
+dotnet watch=küçük değişilikleri sayfaya yansıtacak. Projeye izlenebilirlik katacaktır.
+----------------------------
+@model Razor page yani sayfa ile ilgili işlemler için önemlidir.
+---------------------
+Index1 içerisindeki class'ı lead olan bir bootstraptir. buradaki @Model controllerdan gelen veriyi taşır. @model gelecek verinin type'ını belirtmektedir.
+--------------------------
+View içerisinde @ işaretinden sonra C# kodları yazabiliriz.
+Eğer HTML ifadesi yazarsak tekrar @ işareti kullanmalıyız. Örnek:<p>@name</p>
+---------------------------------------------------------------------------------
+Client--GET-->Server
+Client<--GET--Server
+Client--POST-->Server=(Gerekli ise DB ye veriyi kaydeder.)
+Client<--POST--Server=Bir response gönderir client için. (Post-Redirect-Get{PRG} pattern)
+-------------------------------------------
+_ViewImports.cshtml=Razor page'lerde kullanılacak olan sınıfların veya çeşitli veri type'larının tanımlandığı dosyadır.
+TagHelper kullanmak için değiştirilen ifadeler
+-Home/Index içerisinde href
+-Course/Apply içerisinde action
+label içerisinde özel durumlar için <label>E-mail</label> yazılabiliriz. Aksi durumda yazmaya ihtiyaç yoktur.
+input'ta name yerine asp-for kullandık
+_ViewStart içerisinde Layout var. bütün sayfalarda kullanılan ana şablonu işaret eder Layout.
+asp-append-version=ön belleğe almak için kullanılan TagHelper komutudur.
+-------------------------------
+dotnet new sln -o Store = Store isimli bir klasöre solution açar.
+.\Store.sln=komutu Visual Studio içerisinde Store solution'ınını açacaktır.
+dotnet new web -f net7.0 -o .\Store\StoreApp = Store klasörünün altında StoreApp adında boş bir Web Application oluşturuldu.
+dotnet sln .\Store\ add .\Store\StoreApp\ = StoreApp'in csproj dosyasını Store içerisine ekledik.(Visual Studio için yapılan komutlar)
+---------------------------------
+dotnet add package paket_ismi --version x.x.x
+dotnet list package = Paket listesini gösterir.
+-------------------
+Geliştirme ortamına ait bir configuration ifadesi kullanacak isek appsettings.Development.json içerisinde çalışma yapılması gereklidir.
+Hem Development hem Production için geçerli olmasını istediğiniz configuration için appsettings.json kullanılmalıdır.
+------------------
+dotnet tool==> .net deneyimimizi arttıracak birtakım araçlar sağlar ve bu araçlarla çalışarak çok daha hızlı uygulamalar geliştirebiliriz.
+dotnet tool list -g=global tool'ları görebiliriz.
+-------------
+dotnet ef migrations add verilecek_isim=migration oluşturma komutu
+dotnet ef database update = migrate'leri db yazma komutu
+-----------------
+sqlite ortam değişkenini tanımladıktan sonra Db nin kayıtlı olduğu yere giderek sqlite3 .\ProductsDb.db komutunu yazdık.
+.tables diyerek tabloları görüyoruz.
+.help ile yardım menüsüne geçiyoruz.
+.show diyerek sqlite ayarlarını kontrol ediyoruz.
+.mode box diyerek modu değiştiriyoruz. Bu komuttan sonra select * from Products; diyebiliriz.
+-------------------------
+İlgili nesnenin IoC(Inversion of Control) ilk olarak kayıt işlemidir(Register) daha sonra çözülebilmesi gerekir(Resolve) son olarak yaşam süresi(Dispose)=IoC çerçevesidir.
+Örnek olarak uygulamada 3 tane context var. IoC hangi context kullanması gerektiğni söyleyeriz.
+--------------------
+Layout (Düzen)
+>Shift+Alt+F=sayfa düzenlenmesini sağlar.
+-----------------
+Eğer controller bazında, birden fazla controller kullanacağı bir kısmi görünüm paylaşacaksak Views/Shared aksi durumda sadece ilgili sayfa eklenebilir.
+----------------
+Client-side Library Acquisition (Paket yönetim sistemi)
+static dosyalar ile ilgili (static html,script,css) dosyaları gibi içerikler söz konusu olabilir. MVC projelerinde bu tarz projeleri wwwroot üzerinden kontrol ederiz.
+---------------
+dotnet tool libman
+dotnet tool install -g Microsoft.Web.LibraryManager.Cli = yüklü değilse yükleme komutudur.(ilk olarak dotnet tool list -g içerisinden kontrol et.)
+----------
+Bootstrap ile uygulamaya stiller vereceğiz.
+libman -h = libman [options] [command]
+cdnjs=client side kütüphanelerin organize edildiği dağıtım noktası gibi bir şey.
+libman init -p cdnjs=init bir command ,-p provider(options) ve provider olarak "cdnjs" verdik.
+cdnjs.com içerik dağıtım noktası
+-----------------
+libman install bootstrap -d wwwroot/lib/bootstrap = -d destination(yükleneceği yer) ifade eder.
+libman install font-awesome -d wwwroot/lib/font-awesome
+libman install jquery -d wwwroot/lib/jquery
+fontawesome.com-->
+------------------------
+col-sm-12 ekran small olduğunda bir tane Product(sm=small) {div class="col-sm-12 col-md-4 col-lg-3 my-3">}
+col-lg-3 ekran large olduğunda 4 tane Product göstersin.
+my-3= Y ekseni üzerinde 3 birimlik marjin yapma komutu
+-----------------
+dotnet new classlib -f net7.0 -o .\Store\Entities = yeni bir sema eklemek icin
+dotnet sln .\Store\ list = Solutionları listeler
+dotnet sln .\Store.sln add .\Store\Entities\ = Solution ekler. (csproj)
+dotnet add .\Store\StoreApp\ reference .\Store\Repositories\ = projeye referans ekler.
+dotnet build=uygulamayı derler.
+dotnet new classlib -f net7.0 -o .\Store\Repositories
+dotnet sln .\Store\ add .\Store\Repositories\
+dotnet list .\Store\Repositories\ package
+----------------------
+dotnet remove .\Store\StoreApp\ package Microsoft.EntityFrameworkCore = EntityFrameworkCore paketi kaldırıldı.
+---------------------
+PS C:\Users\utku.ozen\source\repos\ASPNET Core MVC\Store> dotnet add .\Repositories\ reference .\Entities
+------------------------------
+dotnet ef database drop
+--------------
+dotnet sln .\Store.sln add .\Services\
+----------------
+Partial View ile modelden bağımsız bir şekilde çalışması için ViewComponent kullanacağız.
+ViewComponent içerisinde bir context var. Bu content içerisinde:
+-HttpContext
+-Request
+-User
+-RouteData
+-ViewBag
+-ModelState
+-ViewData
+kullanabiliriz.
+/Views/[controller]/Components/[viewcomponent]/Default.cshtml
+/Views/Shared/Components/[viewcomponent]/Default.cshtml
+/Views/Shared/Components/[viewcomponent]/Default.cshtml
+/Pages/Shared/Components/[viewcomponent]/Default.cshtml
+/Pages/Components/[viewcomponent]/Default.cshtml
+/Pages/Shared/Components/[viewcomponent]/Default.cshtml
+---------------------------------------------
+localhost:7025/Admin/Product/Update/1=/1-->Route
+localhost:7025/Admin/Product/Update?id=1-->?id=1:QueryString
+------------------------------------------------------------------
+del .\Migrations\ = Migrations klasörünü kaldırır.
+-----------------
+Küçük parçalar üzerinde çalışırken ve modeli doğrudan etkilemeyen yapılar için ViewBag veya ViewData kullanılabilir.
+--------------------
+Servis katmanında her şey yapılabilir. Örneğin nesne için mapper özelliği kullanılabilir. Ancak Repository nin bir varlıkla bir entity ile gidilmesi gerekir.
+------------------------
+Client tarafında yer alan bir dosyanın Stream library ile server'a aktarılabilmesi için enctype="multipart/form-data" cshtml üzerinde kullanılmalıdır.
+------------------------
+Razor Pages kullanarak Controller'a ihtiyaç duymadan Model-View seklinde sayfa tasarimi yapilabilmektedir. @page direktifi ve yonlendirme islemi. Controller olmadan sayfa tasarimi
+---------
+Model-View-View-Model(MVVM) deseni
+View(Razor / HTML) --- PageModel(C#) --- Model(C#) <--> SQL
+*Controller'a ihtiyac duyulmaz.
+----
+dotnet new list
+----
+Razor Page oldugunu belirtmek icin ilk satirda @page komutu kullanilir.
+---------------------------
+MVC, mimarisel bir tasarim desenidir.
+View(Razor/HTML)---PageModel(C#)---Model(C#)<--->SQL[Model-View-View-Model(MVVM)deseni]
+Controller ihtiyaci olmadan Razor ile bir sayfa yapacagiz. 
+MVC'nin endpoint yapisini RazorPage esneklik getirecegiz.
+-----------
+Controller yapisi olmadan bir function direktifiyle bir PageModel ile sayfa iliskendirerek uygulamayi ayaga kaldirabilirim. Routing mekanizmalarini gelistirir iken Page direktifi ile hizlica uygulama yapmamiza izin veren bir yapidir.
+Controller-Action yapilariyla yapabildigimiz herseyi RazorPage ile yapabiliriz.
+-----------
+Bir cshtml uzantili dosyanin RazorPage oldugunu gostermek icin "@page" komutunu kullaniriz.
+Pages dizini altinda bir Shared dizini olusturup bir Layout hazirlayip kullanabiliriz. Yada mevcut sayfa tasarimindan cikmadan Layout kullanabiliriz.
+@page "/endpoint_adresi_ver"=> @page "/getintouch"
+Navbar icerisinde controllerdan farkli olarak asp-controller yerine asp-page komutunu kullaniriz.
+-------
+Auto Rename Tag Extension yuklendi. HTML acilis kapanis taglerini duzenler.
+------------
+Kurulu Extensionlari gormek icin arama cubuguna @installed yazabiliriz.
+---------------------------
+Page Model=Pages dizinine odaklaniyoruz. Controller yapisi olmayan Model-View-View-Model yapisi.
+--------------------
+Eger Visual Studio icerisinde Page dizinine yeni bir dosya eklersek-->Add-Razor Page Empty-->.cshtml.cs adli bir dosya daha eklenir. PageModel inherit edilir. 
+Sadece .cshtml uzantili dosyayi kullanmak istiyorsak ve dinamik bir yapi kuracaksak @functions { } icerisinde belirtiriz.
+------------------
+Bir client'in server ile etkilesimi surekli degildir. Client bir request gonderdigi zaman, request alinir, islenir ve bir response dondurulur.
+HTTP uygulamalarinda surekli bir iletisim yoktur. Client tekrar hatirlanmaz. 
+Session ile client ile server arasinda bir iletisim kurulur, client hatirlanabilir.
+-----------
+Session Middleware, responselar ile requestler arasinda bir etkilesim kurulmasina izin veren yapidir.
+Http stateless-->Client bir request atar response alir. Ikinci request icin server client'i hatirlamak zorunda degildir.
+Session=Client ile Server organize eder.
+-------------------
+State Management(Oturum Yönetimi) Yollari
+-Cookie
+-Session State(*=Projede kullanilan yol)
+-Temp Data
+-Query String
+-Hidden Fields
+-HttpContext.Items
+-Cache
+-------------------------
+.NET Core veri depolama senaryosu, gecici olarak on bellege alma senaryosu yapilacaktir Session State ile.
+-------------------------
+HttpContextAccessor=Bu bir erisimcidir.
+
+

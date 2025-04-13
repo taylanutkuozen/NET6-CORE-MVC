@@ -1,0 +1,30 @@
+@*Layout = "_Layout"; ViewStart kullandık ve gerek kalmadı.*@
+@{
+    Layout = "_Layout";@*Diyelim bu sayfada Layout kullanmak istemiyoruz.*@
+}
+@model IQueryable<Product>
+<div class="row">
+    <div class="col-md-3">
+        @await Component.InvokeAsync("CategoriesMenu")
+    </div>
+    <div class="col-md-9">
+        <div class="row my-3">
+        @foreach (Product prd in Model)
+        {
+            <partial name="_ProductCard" model="@prd" />
+            @*<div>
+        <h3>@prd.ProductName</h3>
+        <p>@prd.ProductPrice</p>
+        <p>
+        <a href="/Product/Get/@prd.ProductID">GetDetails</a>
+        </p>
+        </div>*@
+        }
+        </div>
+    </div>
+</div>
+@section Footer {
+    <div>
+        Only for Index footer
+    </div>
+} @*Burası Index sayfasında görünürken Get.cshtml sayfasında görünmeyecektir. Bir scripttir.*@
