@@ -262,5 +262,7 @@ State Management(Oturum Yönetimi) Yollari
 .NET Core veri depolama senaryosu, gecici olarak on bellege alma senaryosu yapilacaktir Session State ile.
 -------------------------
 HttpContextAccessor=Bu bir erisimcidir.
+-----------------
+Sessionlar hem kullanici hemde tarayiciya ozeldir. Ayni kullanici farkli tarayicilarda sepetlerinde farkli urunleri gorurler.
 
 

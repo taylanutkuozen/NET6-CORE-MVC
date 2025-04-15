@@ -11,7 +11,7 @@ namespace StoreApp.Infrastructure.Extensions
             session.SetString(key, JsonSerializer.Serialize(value));
             /*Key-Value pair icin yukarida value kismini Serialize ederek eklendi.Herhangi bir object bu sekilde hafizada saklanir.*/
         }
-        public static void SetObject<T>(this ISession session, string key, T value)
+        public static void SetJson<T>(this ISession session, string key, T value)
         {
             session.SetString(key, JsonSerializer.Serialize(value));
             /*Bu generic metodu tanimlayarak type bagli bir islem yapabilecegimizi koda tanimladik.*/
