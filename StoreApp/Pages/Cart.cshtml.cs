@@ -9,9 +9,10 @@ namespace StoreApp.Pages
     {
         private readonly IServiceManager _manager;
         public Cart Cart { get; set; } //IoC kaydi yapilacaktir.
-        public CartModel(IServiceManager manager)
+        public CartModel(IServiceManager manager,Cart cartService)
         {
             _manager=manager;
+            Cart=cartService;
         }
         public string ReturnUrl{get;set;}
         public void OnGet(string returnUrl)
@@ -19,7 +20,7 @@ namespace StoreApp.Pages
         {
             //Hangi sayfadan eristiyse, o sayfaya kullanici geri donebilsin
             ReturnUrl=returnUrl ?? "/";//??--> eger ifade referans almadiysa diye kullanildi.
-            Cart=HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
+            //Cart=HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
         }
         public IActionResult OnPost(int productID, string returnUrl)
         {
@@ -30,17 +31,17 @@ namespace StoreApp.Pages
             Product? product=_manager.ProductService.GetOneProduct(productID,false);
             if(product is not null)
             {
-                Cart=HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
+                //Cart=HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
                 Cart.AddItem(product,1);
-                HttpContext.Session.SetJson<Cart>("cart",Cart);
+                //HttpContext.Session.SetJson<Cart>("cart",Cart);
             }
             return Page(); //returnUrl logic yapilabilir.
         }
         public IActionResult OnPostRemove(int id,string returnUrl)
         {
-            Cart=HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
+            //Cart=HttpContext.Session.GetJson<Cart>("cart") ?? new Cart();
             Cart.RemoveLine(Cart.Lines.First(cl=>cl.Product.ProductID.Equals(id)).Product);
-            HttpContext.Session.SetJson<Cart>("cart",Cart);
+            //HttpContext.Session.SetJson<Cart>("cart",Cart);
             return Page();
         }
     }

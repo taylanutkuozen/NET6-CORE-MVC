@@ -7,6 +7,7 @@ using Services.Contracts;
 using Services;
 using AutoMapper;
 using System.Reflection;
+using StoreApp.Models;
 var builder = WebApplication.CreateBuilder(args);//Uygulama başlayacağı ifade edilmiş. Servis yok. hiçbir şey yok
 builder.Services.AddControllersWithViews();//Controller kullanacagim ve View nesnelerinden istifade edecegim.
 builder.Services.AddRazorPages();//Razor Page kullanabilmek için Controller kullanmaya gerek olmayacaktir.
@@ -30,7 +31,7 @@ builder.Services.AddScoped<ICategoryRepository,CategoryRepository>();
 builder.Services.AddScoped<IServiceManager, ServiceManager>();
 builder.Services.AddScoped<IProductService, ProductManager>();
 builder.Services.AddScoped<ICategoryService,CategoryManager>();
-builder.Services.AddScoped<Cart>();
+builder.Services.AddScoped<Cart>(c=> SessionCart.GetCart(c));
 //builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 var app = builder.Build();  //Uygulamanın inşası var denilmiş.
