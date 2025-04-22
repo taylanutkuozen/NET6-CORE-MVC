@@ -1,4 +1,5 @@
 using Entities.Models;
+using Repositories.Contracts;
 using Services.Contracts;
 namespace Services
 {
@@ -9,7 +10,7 @@ namespace Services
         {
             _repositoryManager=repositoryManager;
         }
-        public IQueryable<Order>=>_repositoryManager.Order.Orders;
+        public IQueryable<Order> Orders=>_repositoryManager.Order.Orders;
         public int NumberofInProcess=>_repositoryManager.Order.NumberofInProcess;
         public void Complete(int id)
         {
