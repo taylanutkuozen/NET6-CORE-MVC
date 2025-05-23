@@ -264,5 +264,5 @@ State Management(Oturum Yönetimi) Yollari
 HttpContextAccessor=Bu bir erisimcidir.
 -----------------
 Sessionlar hem kullanici hemde tarayiciya ozeldir. Ayni kullanici farkli tarayicilarda sepetlerinde farkli urunleri gorurler.
-
-
+-----------------------------------------
+Extensions
