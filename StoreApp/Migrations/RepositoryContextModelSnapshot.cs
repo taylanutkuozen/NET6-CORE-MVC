@@ -124,6 +124,9 @@ namespace StoreApp.Migrations
                     b.Property<decimal>("ProductPrice")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("ShowCase")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Summary")
                         .HasColumnType("TEXT");
 
@@ -141,6 +144,7 @@ namespace StoreApp.Migrations
                             ImageUrl = "/images/a.jpg",
                             ProductName = "Computer",
                             ProductPrice = 17000m,
+                            ShowCase = false,
                             Summary = ""
                         },
                         new
@@ -150,6 +154,7 @@ namespace StoreApp.Migrations
                             ImageUrl = "/images/a.jpg",
                             ProductName = "Keyboard",
                             ProductPrice = 1000m,
+                            ShowCase = false,
                             Summary = ""
                         },
                         new
@@ -159,6 +164,7 @@ namespace StoreApp.Migrations
                             ImageUrl = "/images/a.jpg",
                             ProductName = "Mouse",
                             ProductPrice = 500m,
+                            ShowCase = false,
                             Summary = ""
                         },
                         new
@@ -168,6 +174,7 @@ namespace StoreApp.Migrations
                             ImageUrl = "/images/a.jpg",
                             ProductName = "Monitor",
                             ProductPrice = 7000m,
+                            ShowCase = false,
                             Summary = ""
                         },
                         new
@@ -177,6 +184,7 @@ namespace StoreApp.Migrations
                             ImageUrl = "/images/a.jpg",
                             ProductName = "Deck",
                             ProductPrice = 1500m,
+                            ShowCase = false,
                             Summary = ""
                         },
                         new
@@ -186,6 +194,7 @@ namespace StoreApp.Migrations
                             ImageUrl = "/images/a.jpg",
                             ProductName = "History",
                             ProductPrice = 25m,
+                            ShowCase = false,
                             Summary = ""
                         },
                         new
@@ -195,6 +204,37 @@ namespace StoreApp.Migrations
                             ImageUrl = "/images/a.jpg",
                             ProductName = "Hamlet",
                             ProductPrice = 45m,
+                            ShowCase = false,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductID = 8,
+                            CategoryID = 2,
+                            ImageUrl = "/images/a.jpg",
+                            ProductName = "Xp-Pen",
+                            ProductPrice = 100m,
+                            ShowCase = true,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductID = 9,
+                            CategoryID = 1,
+                            ImageUrl = "/images/a.jpg",
+                            ProductName = "Mobile Phone",
+                            ProductPrice = 15000m,
+                            ShowCase = true,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductID = 10,
+                            CategoryID = 2,
+                            ImageUrl = "/images/a.jpg",
+                            ProductName = "Tablet",
+                            ProductPrice = 5000m,
+                            ShowCase = true,
                             Summary = ""
                         });
                 });

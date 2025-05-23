@@ -11,8 +11,8 @@ using Repositories;
 namespace StoreApp.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20250422224333_April2025")]
-    partial class April2025
+    [Migration("20250523194728_MayInit")]
+    partial class MayInit
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -126,6 +126,9 @@ namespace StoreApp.Migrations
                     b.Property<decimal>("ProductPrice")
                         .HasColumnType("TEXT");
 
+                    b.Property<bool>("ShowCase")
+                        .HasColumnType("INTEGER");
+
                     b.Property<string>("Summary")
                         .HasColumnType("TEXT");
 
@@ -140,63 +143,100 @@ namespace StoreApp.Migrations
                         {
                             ProductID = 1,
                             CategoryID = 2,
-                            ImageUrl = "/images/1.jpg",
+                            ImageUrl = "/images/a.jpg",
                             ProductName = "Computer",
                             ProductPrice = 17000m,
+                            ShowCase = false,
                             Summary = ""
                         },
                         new
                         {
                             ProductID = 2,
                             CategoryID = 2,
-                            ImageUrl = "/images/2.jpg",
+                            ImageUrl = "/images/a.jpg",
                             ProductName = "Keyboard",
                             ProductPrice = 1000m,
+                            ShowCase = false,
                             Summary = ""
                         },
                         new
                         {
                             ProductID = 3,
                             CategoryID = 2,
-                            ImageUrl = "/images/3.jpg",
+                            ImageUrl = "/images/a.jpg",
                             ProductName = "Mouse",
                             ProductPrice = 500m,
+                            ShowCase = false,
                             Summary = ""
                         },
                         new
                         {
                             ProductID = 4,
                             CategoryID = 2,
-                            ImageUrl = "/images/4.jpg",
+                            ImageUrl = "/images/a.jpg",
                             ProductName = "Monitor",
                             ProductPrice = 7000m,
+                            ShowCase = false,
                             Summary = ""
                         },
                         new
                         {
                             ProductID = 5,
                             CategoryID = 2,
-                            ImageUrl = "/images/5.jpg",
+                            ImageUrl = "/images/a.jpg",
                             ProductName = "Deck",
                             ProductPrice = 1500m,
+                            ShowCase = false,
                             Summary = ""
                         },
                         new
                         {
                             ProductID = 6,
                             CategoryID = 1,
-                            ImageUrl = "/images/6.jpg",
+                            ImageUrl = "/images/a.jpg",
                             ProductName = "History",
                             ProductPrice = 25m,
+                            ShowCase = false,
                             Summary = ""
                         },
                         new
                         {
                             ProductID = 7,
                             CategoryID = 1,
-                            ImageUrl = "/images/7.jpg",
+                            ImageUrl = "/images/a.jpg",
                             ProductName = "Hamlet",
                             ProductPrice = 45m,
+                            ShowCase = false,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductID = 8,
+                            CategoryID = 2,
+                            ImageUrl = "/images/a.jpg",
+                            ProductName = "Xp-Pen",
+                            ProductPrice = 100m,
+                            ShowCase = true,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductID = 9,
+                            CategoryID = 1,
+                            ImageUrl = "/images/a.jpg",
+                            ProductName = "Mobile Phone",
+                            ProductPrice = 15000m,
+                            ShowCase = true,
+                            Summary = ""
+                        },
+                        new
+                        {
+                            ProductID = 10,
+                            CategoryID = 2,
+                            ImageUrl = "/images/a.jpg",
+                            ProductName = "Tablet",
+                            ProductPrice = 5000m,
+                            ShowCase = true,
                             Summary = ""
                         });
                 });

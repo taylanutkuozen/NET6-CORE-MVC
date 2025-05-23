@@ -23,13 +23,14 @@ app.UseRouting();//Routing mekanizmasını dikkate almasını sağlamak için
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapAreaControllerRoute(
-        name:"Admin",
-        areaName:"Admin",
-        pattern:"Admin/{controller=Dashboard}/{action=Index}/{id?}"
+        name: "Admin",
+        areaName: "Admin",
+        pattern: "Admin/{controller=Dashboard}/{action=Index}/{id?}"
     );
-    endpoints.MapControllerRoute(    
+    endpoints.MapControllerRoute(
         "default",
         "{controller=Home}/{action=Index}/{id?}");
-        endpoints.MapRazorPages();//Razor Pages endpoint icerisinde yapilandirdik.
+    endpoints.MapRazorPages();//Razor Pages endpoint icerisinde yapilandirdik.
 });
+app.ConfigureAndCheckMigration();
 app.Run();
