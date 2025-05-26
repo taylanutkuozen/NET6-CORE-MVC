@@ -9,6 +9,7 @@ namespace Services.Contracts
         void CreateProductService(ProductDtoForInsertion product);
         void UpdateOneProduct(ProductDtoForUpdate productDto);
         void DeleteOneProduct(int id);
-        ProductDtoForUpdate GetOneProductForUpdate(int id,bool trackChanges);
+        ProductDtoForUpdate GetOneProductForUpdate(int id, bool trackChanges);
+        IEnumerable<Product> GetShowCaseProducts(bool trackChanges);
     }
 }

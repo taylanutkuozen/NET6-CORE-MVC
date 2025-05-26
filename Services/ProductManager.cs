@@ -18,10 +18,15 @@ namespace Services
         {
             return _repositoryManager.Product.GetAllProducts(trackChanges);
         }
+        public IEnumerable<Product> GetShowCaseProducts(bool trackChanges)
+        {
+            var products = _repositoryManager.Product.GetShowCaseProducts(trackChanges);
+            return products;
+        }
         public Product? GetOneProduct(int id, bool trackChanges)
         {
-            var product=_repositoryManager.Product.GetOneProduct(id,trackChanges);
-            if(product is null)
+            var product = _repositoryManager.Product.GetOneProduct(id, trackChanges);
+            if (product is null)
             {
                 throw new Exception("Product not found!");
             }
