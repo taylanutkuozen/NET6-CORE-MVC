@@ -267,3 +267,5 @@ Sessionlar hem kullanici hemde tarayiciya ozeldir. Ayni kullanici farkli tarayic
 -----------------------------------------
 Extensions
 Localization=Yerellestirme ve globallestirme. Para sembolu ekleyecegiz. Hangi ulkeden servera request yapilirsa ona gore para birimi sembolu gelsin.
+--------------
+Routing=Endpointler lowercase olsun
