@@ -29,7 +29,8 @@ namespace Repositories
         public IQueryable<Product> GetAllProductsWithDetails(ProductRequestParameters productParameters)
         {
             return _context.Products.FilteredByCategoryId(productParameters.CategoryId)
-                                     .FilteredBySearchTerm(productParameters.SearchTerm); 
+                            .FilteredBySearchTerm(productParameters.SearchTerm)
+                            .FilteredByPrice(productParameters.MinPrice,productParameters.MaxPrice,productParameters.IsValidPrice); 
             //RepositoryExtension
                                              
         }
