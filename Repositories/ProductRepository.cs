@@ -3,9 +3,11 @@ using Entities.Models;
 using Repositories.Contracts;
 using Entities.RequestParameters;
 using Microsoft.EntityFrameworkCore;
+using Repositories.Extensions;
 namespace Repositories
 {
-    public class ProductRepository : RepositoryBase<Product>, IProductRepository
+    /*sealed ifadesi ilgili class icin daha fazla kalitilamayacagini belirtir. Son hali anlamina gelmektedir.*/
+    public sealed class ProductRepository : RepositoryBase<Product>, IProductRepository
     {
         public ProductRepository(RepositoryContext context) : base(context)
         {
@@ -26,8 +28,7 @@ namespace Repositories
         }
         public IQueryable<Product> GetAllProductsWithDetails(ProductRequestParameters productParameters)
         {
-            return productParameters.CategoryId is null ? _context.Products.Include(p => p.Category)
-                                             : _context.Products.Include(p => p.Category).Where(p => p.CategoryID.Equals(productParameters.CategoryId));
+            return _context.Products.FilteredByCategoryId(productParameters.CategoryId); //RepositoryExtension
                                              
         }
     }
