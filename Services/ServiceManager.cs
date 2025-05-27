@@ -7,14 +7,14 @@ namespace Services
         private readonly IProductService _productService;
         private readonly ICategoryService _categoryService;
         private readonly IOrderService _orderService;
-        public ServiceManager(IOrderService orderService,IProductService productService,ICategoryService categoryService)
+        public ServiceManager(IOrderService orderService, IProductService productService, ICategoryService categoryService)
         {
-            _productService=productService;
-            _categoryService=categoryService;
-            _orderService=orderService;
+            _productService = productService;
+            _categoryService = categoryService;
+            _orderService = orderService;
         }
         public IProductService ProductService => _productService;
         public ICategoryService CategoryService => _categoryService;
-        public IOrderService OrderService=>_orderService;
+        public IOrderService OrderService => _orderService;
     }
 }

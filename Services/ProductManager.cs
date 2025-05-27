@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Entities.Dtos;
 using Entities.Models;
+using Entities.RequestParameters;
 using Repositories.Contracts;
 using Services.Contracts;
 namespace Services
@@ -9,10 +10,10 @@ namespace Services
     {
         private readonly IRepositoryManager _repositoryManager;
         private readonly IMapper _mapper;
-        public ProductManager(IRepositoryManager repositoryManager,IMapper mapper)
+        public ProductManager(IRepositoryManager repositoryManager, IMapper mapper)
         {
-            _repositoryManager=repositoryManager;
-            _mapper=mapper;
+            _repositoryManager = repositoryManager;
+            _mapper = mapper;
         }
         public IEnumerable<Product> GetAllProducts(bool trackChanges)
         {
@@ -43,7 +44,7 @@ namespace Services
               ProductPrice=productDto.ProductPrice,
               CategoryID=productDto.CategoryID  
             };Automapper kullanılmadan*/
-            Product product=_mapper.Map<Product>(productDto);
+            Product product = _mapper.Map<Product>(productDto);
             _repositoryManager.Product.Create(product);
             _repositoryManager.Save();
         }
@@ -53,24 +54,28 @@ namespace Services
             //entity.ProductName=productDto.ProductName;
             //entity.ProductPrice=productDto.ProductPrice;
             //entity.CategoryID=productDto.CategoryID;
-            var entity=_mapper.Map<Product>(productDto);
+            var entity = _mapper.Map<Product>(productDto);
             _repositoryManager.Product.UpdateOneProduct(entity);
             _repositoryManager.Save();
         }
         public void DeleteOneProduct(int id)
         {
-            Product product=_repositoryManager.Product.GetOneProduct(id,false);
-            if(product is not null)
+            Product product = _repositoryManager.Product.GetOneProduct(id, false);
+            if (product is not null)
             {
-                 _repositoryManager.Product.DeleteProduct(product);
-                 _repositoryManager.Save();
+                _repositoryManager.Product.DeleteProduct(product);
+                _repositoryManager.Save();
             }
         }
-        public ProductDtoForUpdate GetOneProductForUpdate(int id,bool trackChanges)
+        public ProductDtoForUpdate GetOneProductForUpdate(int id, bool trackChanges)
         {
-            var product=GetOneProduct(id,false);
-            var productDto=_mapper.Map<ProductDtoForUpdate>(product);
+            var product = GetOneProduct(id, false);
+            var productDto = _mapper.Map<ProductDtoForUpdate>(product);
             return productDto;
+        }
+        public IEnumerable<Product> GetAllProductsWithDetails(ProductRequestParameters productParameters)
+        {
+            return _repositoryManager.Product.GetAllProductsWithDetails(productParameters);
         }
     }
 }

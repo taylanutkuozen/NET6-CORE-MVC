@@ -1,7 +1,8 @@
 using System.Reflection.Metadata.Ecma335;
 using Entities.Models;
 using Repositories.Contracts;
-
+using Entities.RequestParameters;
+using Microsoft.EntityFrameworkCore;
 namespace Repositories
 {
     public class ProductRepository : RepositoryBase<Product>, IProductRepository
@@ -22,6 +23,12 @@ namespace Repositories
         public IQueryable<Product> GetShowCaseProducts(bool trackChanges)
         {
             return FindAll(trackChanges).Where(p => p.ShowCase.Equals(true));
+        }
+        public IQueryable<Product> GetAllProductsWithDetails(ProductRequestParameters productParameters)
+        {
+            return productParameters.CategoryId is null ? _context.Products.Include(p => p.Category)
+                                             : _context.Products.Include(p => p.Category).Where(p => p.CategoryID.Equals(productParameters.CategoryId));
+                                             
         }
     }
 }

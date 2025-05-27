@@ -5,6 +5,7 @@ using Entities.Models;
 using Repositories;
 using Repositories.Contracts;
 using Services.Contracts;
+using Entities.RequestParameters;
 namespace StoreApp.Controllers
 {
     public class ProductController : Controller
@@ -19,9 +20,9 @@ namespace StoreApp.Controllers
             var model=_manager.ProductService.GetOneProduct(id,false);
             return View(model);
         }
-        public IActionResult Index()
+        public IActionResult Index(ProductRequestParameters productParameters)
         {
-            var model= _manager.ProductService.GetAllProducts(false);
+            var model= _manager.ProductService.GetAllProductsWithDetails(productParameters);
             return View(model);
         }
         /*public IEnumerable<Product> Index()
