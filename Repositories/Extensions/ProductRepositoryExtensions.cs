@@ -15,5 +15,12 @@ namespace Repositories.Extensions
             else
                 return products.Where(prd => prd.CategoryID.Equals(categoryId));
         }
+        public static IQueryable<Product> FilteredBySearchTerm(this IQueryable<Product> products,String? searchTerm)
+        {
+            if (string.IsNullOrWhiteSpace(searchTerm))
+                return products;
+            else
+                return products.Where(prd => prd.ProductName.ToLower().Contains(searchTerm.ToLower()));
+        }
     }
 }
