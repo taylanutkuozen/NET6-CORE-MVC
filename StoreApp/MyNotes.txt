@@ -266,3 +266,4 @@ HttpContextAccessor=Bu bir erisimcidir.
 Sessionlar hem kullanici hemde tarayiciya ozeldir. Ayni kullanici farkli tarayicilarda sepetlerinde farkli urunleri gorurler.
 -----------------------------------------
 Extensions
+Localization=Yerellestirme ve globallestirme. Para sembolu ekleyecegiz. Hangi ulkeden servera request yapilirsa ona gore para birimi sembolu gelsin.

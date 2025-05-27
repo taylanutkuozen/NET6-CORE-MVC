@@ -33,4 +33,5 @@ app.UseEndpoints(endpoints =>
     endpoints.MapRazorPages();//Razor Pages endpoint icerisinde yapilandirdik.
 });
 app.ConfigureAndCheckMigration();
+app.ConfigureLocalization();
 app.Run();
