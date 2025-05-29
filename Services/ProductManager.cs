@@ -77,5 +77,13 @@ namespace Services
         {
             return _repositoryManager.Product.GetAllProductsWithDetails(productParameters);
         }
+        public IEnumerable<Product> GetLastestProducts(int n, bool trackChanges)
+        {
+            return _repositoryManager
+                    .Product
+                    .FindAll(trackChanges)
+                    .OrderByDescending(prd => prd.ProductID)
+                    .Take(n);
+        }
     }
 }
