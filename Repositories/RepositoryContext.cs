@@ -2,10 +2,11 @@
 using Entities.Models;
 using Microsoft.EntityFrameworkCore;
 using Repositories.Config;
-
-namespace Repositories;
-
-    public class RepositoryContext:DbContext
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+namespace Repositories
+{
+    public class RepositoryContext:IdentityDbContext<IdentityUser>
     {
         public RepositoryContext(DbContextOptions<RepositoryContext> options):base(options) //DbContextOptions gelmeyen bir talep, bir newleme isteği geçersizdir.
         {
@@ -22,3 +23,4 @@ namespace Repositories;
         public DbSet<Category> Categories { get; set; }
         public DbSet<Order> Orders { get; set; }
     }
+}

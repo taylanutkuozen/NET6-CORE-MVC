@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);//Uygulama başlayacağı ifade
 builder.Services.AddControllersWithViews();//Controller kullanacagim ve View nesnelerinden istifade edecegim.
 builder.Services.AddRazorPages();//Razor Page kullanabilmek için Controller kullanmaya gerek olmayacaktir.
 builder.Services.ConfigureDbContext(builder.Configuration);
+builder.Services.ConfigureIdentity();
 builder.Services.ConfigureSession();
 builder.Services.ConfigureRepositoryRegistration();
 builder.Services.ConfigureServicesRegistration();
@@ -35,4 +36,5 @@ app.UseEndpoints(endpoints =>
 });
 app.ConfigureAndCheckMigration();
 app.ConfigureLocalization();
+app.ConfigureDefaultAdminUser();
 app.Run();

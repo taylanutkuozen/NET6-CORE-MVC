@@ -6,6 +6,7 @@ using Services.Contracts;
 using Services;
 using Entities.Models;
 using StoreApp.Models;
+using Microsoft.AspNetCore.Identity;
 namespace StoreApp.Infrastructure.Extensions
 {
     public static class ServiceExtension
@@ -15,7 +16,22 @@ namespace StoreApp.Infrastructure.Extensions
             services.AddDbContext<RepositoryContext>(options => //İhtiyaç olması durumunda Db kullanacağımızı belirtmiş olduk.
             {
                 options.UseSqlite(configuration.GetConnectionString("sqlconnection"), b => b.MigrationsAssembly("StoreApp"));//Migration hedefi belirttik.
+                options.EnableSensitiveDataLogging(true);//Loglara gostermek icin. Production icin false cekebiliriz.
             });
+        }
+        public static void ConfigureIdentity(this IServiceCollection services)
+        {
+            services.AddIdentity<IdentityUser, IdentityRole>(
+                options=>
+                {
+                    options.SignIn.RequireConfirmedAccount = false;
+                    options.User.RequireUniqueEmail = true;
+                    options.Password.RequireUppercase = true;
+                    options.Password.RequireLowercase = true;
+                    options.Password.RequireDigit = true;
+                    options.Password.RequiredLength = 6;
+                }
+            ).AddEntityFrameworkStores<RepositoryContext>();//Nerede store edecegimiz EntityFrameworkStore ile gosterildi.
         }
         public static void ConfigureSession(this IServiceCollection services)
         {

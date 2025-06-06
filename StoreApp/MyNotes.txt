@@ -271,3 +271,19 @@ Localization=Yerellestirme ve globallestirme. Para sembolu ekleyecegiz. Hangi ul
 Routing=Endpointler lowercase olsun
 ------------
 TagHelper, RazorPage'ler icin kullanilir. Html etiketlerini genisletmek ve cesitli etiketler kazandirmak icin kullaniriz.
+-----------------------
+Store uzerinde iken Terminal= dotnet list .\Entities\ package=Entities projesindeki paketleri gosterir.
+----------
+IDENTITY=Web sitesine kullanici entegrasyonu saglariz. Kullanici rolleri vardir. OturumAcma, yetkiler dogrultusunda kaynaklara erismesi
+Authentication&Authorization
+dotnet add .\Entities\ package Microsoft.AspNetCore.Identity.EntityFrameworkCore --version 6.0.0-->Entities icerisine kuruldu.
+IdentityDbContext=Veritabani nesnelerinin teminini saglar.
+IdentityUser=Bir kullaniciyi temsil eder.
+IdentityRole=Rol temsil eder.
+UserManager=Kullanicilar ile calismak icin metotlar saglar.
+RoleManager=Role ile calismak icin metotlar saglar.
+SignInManager=Oturum acmis kullanicilar icin metotlar saglar.
+IdentityResult=Identity operasyonlarinin sonuclarini saklar.
+-----------------
+SignInManager=PasswordSignInAsync(IdentityUser,password,false,false)
+              SignOutAsync
