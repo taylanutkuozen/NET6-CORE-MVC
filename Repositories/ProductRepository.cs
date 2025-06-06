@@ -30,9 +30,9 @@ namespace Repositories
         {
             return _context.Products.FilteredByCategoryId(productParameters.CategoryId)
                             .FilteredBySearchTerm(productParameters.SearchTerm)
-                            .FilteredByPrice(productParameters.MinPrice,productParameters.MaxPrice,productParameters.IsValidPrice); 
-            //RepositoryExtension
-                                             
+                            .FilteredByPrice(productParameters.MinPrice, productParameters.MaxPrice, productParameters.IsValidPrice)
+                            .ToPaginate(productParameters.PageNumber,productParameters.PageSize);
+            //RepositoryExtension                              
         }
     }
 }

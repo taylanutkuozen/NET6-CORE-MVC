@@ -6,6 +6,7 @@ using Repositories;
 using Repositories.Contracts;
 using Services.Contracts;
 using Entities.RequestParameters;
+using StoreApp.Models;
 namespace StoreApp.Controllers
 {
     public class ProductController : Controller
@@ -22,8 +23,18 @@ namespace StoreApp.Controllers
         }
         public IActionResult Index(ProductRequestParameters productParameters)
         {
-            var model= _manager.ProductService.GetAllProductsWithDetails(productParameters);
-            return View(model);
+            var products= _manager.ProductService.GetAllProductsWithDetails(productParameters);
+            var pagination = new Pagination()
+            {
+                CurrentPage = productParameters.PageNumber,
+                ItemsPerPage = productParameters.PageSize,
+                TotalItems=_manager.ProductService.GetAllProducts(false).Count()
+            };
+            return View(new ProductListViewModel()
+            {
+                Products = products,
+                Pagination=pagination
+            });
         }
         /*public IEnumerable<Product> Index()
         {
