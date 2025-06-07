@@ -1,3 +1,4 @@
+using Entities.Dtos;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
@@ -18,7 +19,7 @@ namespace StoreApp.Controllers
         {
             return View(new LoginModel()
             {
-                ReturnUrl=ReturnUrl
+                ReturnUrl = ReturnUrl
             });
         }
         [HttpPost]
@@ -44,6 +45,35 @@ namespace StoreApp.Controllers
         {
             await _signInManager.SignOutAsync();
             return Redirect(ReturnUrl); //Ornek=http://localhost:5135/account/logout?ReturnUrl=/product
+        }
+        public IActionResult Register()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register([FromForm] RegisterDto registerDto)
+        {
+            var user = new IdentityUser
+            {
+                UserName = registerDto.UserName,
+                Email = registerDto.Email
+            };
+            var result = await _userManager.CreateAsync(user, registerDto.Password);
+            if (result.Succeeded)
+            {
+                var roleResult = await _userManager.AddToRoleAsync(user, "User");
+                if (roleResult.Succeeded)
+                    return RedirectToAction("Login",new {ReturnUrl="/"}); /*Anonim Nesne Tanimi=new { ... }*/
+            }
+            else
+            {
+                foreach (var err in result.Errors)
+                {
+                    ModelState.AddModelError("", err.Description);
+                }
+            }
+            return View();
         }
     }
 }
