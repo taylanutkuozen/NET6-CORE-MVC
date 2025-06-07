@@ -22,6 +22,10 @@ app.MapGet("/btk",()=>"BTK Akademi");*/
 //Tek tek endpointleri bu şekilde tanımlamak yerine bir routing mekanizması kuruyoruz.
 app.UseHttpsRedirection();
 app.UseRouting();//Routing mekanizmasını dikkate almasını sağlamak için
+app.UseAuthentication();
+app.UseAuthorization();
+/*Kisi yetkili mi degil mi oturum acti mi acmadi mi bu bilgileri kaydedebiliriz.
+Authentication ve Authorization Routing ile Endpoints arasinda olmalidir.*/
 app.UseEndpoints(endpoints =>
 {
     endpoints.MapAreaControllerRoute(

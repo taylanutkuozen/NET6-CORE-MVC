@@ -14,13 +14,16 @@ namespace StoreApp.Controllers
             _userManager = userManager;
             _signInManager = signInManager;
         }
-        public IActionResult Login()
+        public IActionResult Login([FromQuery(Name = "ReturnUrl")] string ReturnUrl = "/")
         {
-            return View();
+            return View(new LoginModel()
+            {
+                ReturnUrl=ReturnUrl
+            });
         }
         [HttpPost]
         [ValidateAntiForgeryToken] //sahtecilik onlemek icin
-        public async Task<IActionResult> Login([FromForm]LoginModel loginModel)
+        public async Task<IActionResult> Login([FromForm] LoginModel loginModel)
         {
             if (ModelState.IsValid)
             {
@@ -36,6 +39,11 @@ namespace StoreApp.Controllers
                 }
             }
             return View();
+        }
+        public async Task<IActionResult> Logout([FromQuery(Name = "ReturnUrl")] string ReturnUrl = "/")
+        {
+            await _signInManager.SignOutAsync();
+            return Redirect(ReturnUrl); //Ornek=http://localhost:5135/account/logout?ReturnUrl=/product
         }
     }
 }
