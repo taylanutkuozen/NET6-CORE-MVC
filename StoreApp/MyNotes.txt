@@ -287,3 +287,15 @@ IdentityResult=Identity operasyonlarinin sonuclarini saklar.
 -----------------
 SignInManager=PasswordSignInAsync(IdentityUser,password,false,false)
               SignOutAsync
+----------------------------
+UserManager
+-CreateAsync(user)
+-UpdateAsync(user)
+-DeleteAsync(user)
+-Users
+-FindByIdAsync(id)
+-FindByNameAsync(name)
+-IsInRoleAsync(user,roleName)
+-AddToRoleAsync(user,roleName)
+-RemoveFromRoleAsync(user,roleName)
+-GetRolesAsync(user)
