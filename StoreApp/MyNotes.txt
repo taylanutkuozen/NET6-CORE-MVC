@@ -299,3 +299,8 @@ UserManager
 -AddToRoleAsync(user,roleName)
 -RemoveFromRoleAsync(user,roleName)
 -GetRolesAsync(user)
+---------
+Authorize
+AllowAnonymous=Tum kullanicilarin erisimine izin verir.
+Authorize=Oturum acmis kullanicilar ile sinirlar.
+Authorize(Roles="r1,r2")=Belirtilen rollere gore sinirlar.

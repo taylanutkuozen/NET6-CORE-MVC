@@ -1,25 +1,27 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Services.Contracts;
 namespace StoreApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class OrderController:Controller
+    [Authorize(Roles ="Admin")]
+    public class OrderController : Controller
     {
         private readonly IServiceManager _serviceManager;
         public OrderController(IServiceManager serviceManager)
         {
-            _serviceManager=serviceManager;
+            _serviceManager = serviceManager;
         }
         public IActionResult Index()
         {
-            var orders=_serviceManager.OrderService.Orders;
+            var orders = _serviceManager.OrderService.Orders;
             return View(orders);
         }
         [HttpPost]
         public IActionResult Complete([FromForm] int id)
         {
             _serviceManager.OrderService.Complete(id);
-            return  RedirectToAction("Index");
+            return RedirectToAction("Index");
         }
     }
 }

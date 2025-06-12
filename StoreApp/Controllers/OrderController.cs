@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Services.Contracts;
 using Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 namespace StoreApp.Controllers
 {
     public class OrderController:Controller
@@ -12,6 +13,7 @@ namespace StoreApp.Controllers
             _serviceManager=serviceManager;
             _cart=cart;
         }
+        [Authorize]
         public ViewResult Checkout() => View(new Order());
         [HttpPost]
         [ValidateAntiForgeryToken] //Sahteciliği onlemek amaciyla
