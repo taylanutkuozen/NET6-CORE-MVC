@@ -64,7 +64,7 @@ namespace StoreApp.Controllers
             {
                 var roleResult = await _userManager.AddToRoleAsync(user, "User");
                 if (roleResult.Succeeded)
-                    return RedirectToAction("Login",new {ReturnUrl="/"}); /*Anonim Nesne Tanimi=new { ... }*/
+                    return RedirectToAction("Login", new { ReturnUrl = "/" }); /*Anonim Nesne Tanimi=new { ... }*/
             }
             else
             {
@@ -73,6 +73,10 @@ namespace StoreApp.Controllers
                     ModelState.AddModelError("", err.Description);
                 }
             }
+            return View();
+        }
+        public IActionResult AccessDenied([FromQuery(Name = "ReturnUrl")] string returnUrl)
+        {
             return View();
         }
     }

@@ -7,6 +7,7 @@ using Services;
 using Entities.Models;
 using StoreApp.Models;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 namespace StoreApp.Infrastructure.Extensions
 {
     public static class ServiceExtension
@@ -22,7 +23,7 @@ namespace StoreApp.Infrastructure.Extensions
         public static void ConfigureIdentity(this IServiceCollection services)
         {
             services.AddIdentity<IdentityUser, IdentityRole>(
-                options=>
+                options =>
                 {
                     options.SignIn.RequireConfirmedAccount = false;
                     options.User.RequireUniqueEmail = true;
@@ -62,10 +63,20 @@ namespace StoreApp.Infrastructure.Extensions
         }
         public static void ConfigureRouting(this IServiceCollection services)
         {
-            services.AddRouting(options=>
+            services.AddRouting(options =>
             {
                 options.LowercaseUrls = true;
                 options.AppendTrailingSlash = false; /*Bu komut sona bir slash ekleyip eklememe ile ilgili bir komuttur.*/
+            });
+        }
+        public static void ConfigureApplicationCookie(this IServiceCollection services)
+        {
+            services.ConfigureApplicationCookie(opt =>
+            {
+                opt.LoginPath = new PathString("/Account/Login");
+                opt.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+                opt.ExpireTimeSpan = TimeSpan.FromMinutes(10);
+                opt.AccessDeniedPath = new PathString("/Account/AccessDenied");
             });
         }
     }

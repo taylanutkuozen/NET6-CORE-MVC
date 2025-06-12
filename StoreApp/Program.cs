@@ -12,6 +12,7 @@ builder.Services.ConfigureSession();
 builder.Services.ConfigureRepositoryRegistration();
 builder.Services.ConfigureServicesRegistration();
 builder.Services.ConfigureRouting();
+builder.Services.ConfigureApplicationCookie();
 //builder.Services.AddAutoMapper(typeof(Program));
 builder.Services.AddAutoMapper(Assembly.GetExecutingAssembly());
 var app = builder.Build();  //Uygulamanın insası var denilmiş.
