@@ -32,11 +32,12 @@ Extensions
 -->Logging=Günlükler yazılım geliştirirken oldukça önemlidir. Yazılımda neler olup bittiğini anlarız.
 -->Configuration=.NET'te gerekli middlewareler kullanılırken,gerek kütüphane kurumları gerçekleştirilirken kullanırız.
 -->Options=Gerek kütüphaneler gerek middlewareler opsiyonel bazı özellikler sağlar. Lambda fonksiyonlarla birlikte kullanırız.
--->FileProvider
+-->FileProviders
 -->Dependency Injection=Container yapısı. Bağımlılık enjeksiyonunu eğitim kapsamında öğreneceğiz.
 Servers
 -->Kestrel=Default olarak gelmektedir.
 -->IIS=Internet information server
+-->Http.sys
 Middleware
 -->Routing
 -->Compression
@@ -50,6 +51,7 @@ Web UI
 -->MVC
 -->Razor Pages
 //SPA=Single Page Application(Angular,React,JavaScript)-->API'ler ile.
+-->Blazor
 Services
 -->Http APIs
 //SignalR=Http protokolünde sürekli requestlerin gelmesi responseların gitmesi gibi bir durum var. Bu durumun sürekli olması istendiğinde oldukça maliyetli oluyor. Sunucu ve istemci arasında neler olduğu dinlenebilir ise maliyeti düşürebiliriz. Bu probleme çözüm oluyor.
@@ -304,3 +306,22 @@ Authorize
 AllowAnonymous=Tum kullanicilarin erisimine izin verir.
 Authorize=Oturum acmis kullanicilar ile sinirlar.
 Authorize(Roles="r1,r2")=Belirtilen rollere gore sinirlar.
+---------
+API
+Backend Systems
+*Services-->Persistance(Db) or
+*Services-->Presentation(APIs) --> Web, Mobile, IoT Device
+--Backend as a service BaaS
+--Backend as a function BaaF
+-------------------------
+dotnet new classlib -f net6.0 -o Presentation
+dotnet sln .\Store.sln add .\Presentation\
+dotnet add .\Presentation\ reference .\Services\
+dotnet add .\StoreApp\ reference .\Presentation\
+dotnet build
+---------------------
+Thunder Client eklentisi ile API testleri yapabiliriz.
+-------------
+<a target="_blank" --> yeni sekme acar.
+------------
+Tooltip=

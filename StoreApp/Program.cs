@@ -4,6 +4,8 @@ using AutoMapper;
 using System.Reflection;
 using StoreApp.Infrastructure.Extensions;
 var builder = WebApplication.CreateBuilder(args);//Uygulama başlayacağı ifade edilmiş. Servis yok. hiçbir şey yok
+builder.Services.AddControllers()
+.AddApplicationPart(typeof(Presentation.AssemblyReference).Assembly);//API destegini gosterdik.
 builder.Services.AddControllersWithViews();//Controller kullanacagim ve View nesnelerinden istifade edecegim.
 builder.Services.AddRazorPages();//Razor Page kullanabilmek için Controller kullanmaya gerek olmayacaktir.
 builder.Services.ConfigureDbContext(builder.Configuration);
@@ -38,6 +40,7 @@ app.UseEndpoints(endpoints =>
         "default",
         "{controller=Home}/{action=Index}/{id?}");
     endpoints.MapRazorPages();//Razor Pages endpoint icerisinde yapilandirdik.
+    endpoints.MapControllers(); //API destegi
 });
 app.ConfigureAndCheckMigration();
 app.ConfigureLocalization();
