@@ -325,3 +325,5 @@ Thunder Client eklentisi ile API testleri yapabiliriz.
 <a target="_blank" --> yeni sekme acar.
 ------------
 Tooltip=
+--------------
+ at System.Reflection.CustomAttribute._CreateCaObject(RuntimeModule pModule, RuntimeType type, IRuntimeMethodInfo pCtor, Byte** ppBlob, Byte* pEndBlob, Int32* pcNamedArgs)
