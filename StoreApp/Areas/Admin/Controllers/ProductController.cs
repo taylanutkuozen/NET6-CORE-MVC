@@ -1,10 +1,12 @@
 using System.Threading;//.RateLimiting;
 using Entities.Dtos;
 using Entities.Models;
+using Entities.RequestParameters;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Services.Contracts;
+using StoreApp.Models;
 namespace Areas.Admin.Controllers
 {
     [Area("Admin")]
@@ -20,10 +22,20 @@ namespace Areas.Admin.Controllers
         {
             return new SelectList(_manager.CategoryService.GetAllCategories(false), "CategoryID", "CategoryName", "1");//1.parametresi neleri liste haline getireceğiz, 2.parametre selected value olarak ne kullanacağız,3.parametre arayüzde ne görülecek, 4.parametre default olarak 1 görülecek. SelectList bir TagHelper nesnesidir.
         }
-        public IActionResult Index()
+        public IActionResult Index([FromQuery]ProductRequestParameters productRequestParameters)
         {
-            var model = _manager.ProductService.GetAllProducts(false);
-            return View(model);
+            var products= _manager.ProductService.GetAllProductsWithDetails(productRequestParameters);
+            var pagination = new Pagination()
+            {
+                CurrentPage = productRequestParameters.PageNumber,
+                ItemsPerPage = productRequestParameters.PageSize,
+                TotalItems=_manager.ProductService.GetAllProducts(false).Count()
+            };
+            return View(new ProductListViewModel()
+            {
+                Products = products,
+                Pagination=pagination
+            });
         }
         public IActionResult Create()
         {
