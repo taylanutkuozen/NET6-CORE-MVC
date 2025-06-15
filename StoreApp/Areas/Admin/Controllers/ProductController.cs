@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Services.Contracts;
 using StoreApp.Models;
-namespace Areas.Admin.Controllers
+namespace StoreApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
     [Authorize(Roles ="Admin")]
@@ -24,6 +24,7 @@ namespace Areas.Admin.Controllers
         }
         public IActionResult Index([FromQuery]ProductRequestParameters productRequestParameters)
         {
+            ViewData["Title"] = "Products";
             var products= _manager.ProductService.GetAllProductsWithDetails(productRequestParameters);
             var pagination = new Pagination()
             {
@@ -56,6 +57,7 @@ namespace Areas.Admin.Controllers
                 }
                 productDto.ImageUrl = String.Concat("/images/", file.FileName);
                 _manager.ProductService.CreateProductService(productDto);
+                TempData["success"] = $"{productDto.ProductName} has been created";
                 return RedirectToAction("Index");
             }
             return View();
@@ -64,6 +66,7 @@ namespace Areas.Admin.Controllers
         {
             ViewBag.Categories = GetCategoriesSelectList();
             var model = _manager.ProductService.GetOneProductForUpdate(id, false);
+            ViewData["Title"] = model?.ProductName;
             return View(model);
         }
         [HttpPost]
@@ -87,6 +90,7 @@ namespace Areas.Admin.Controllers
         public IActionResult Delete([FromRoute(Name = "id")] int id)
         {
             _manager.ProductService.DeleteOneProduct(id);
+            TempData["danger"] = "The product has been removed";
             return RedirectToAction("Index");
         }
     }

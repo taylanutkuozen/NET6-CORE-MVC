@@ -326,4 +326,5 @@ Thunder Client eklentisi ile API testleri yapabiliriz.
 ------------
 Tooltip=
 --------------
- at System.Reflection.CustomAttribute._CreateCaObject(RuntimeModule pModule, RuntimeType type, IRuntimeMethodInfo pCtor, Byte** ppBlob, Byte* pEndBlob, Int32* pcNamedArgs)
+ViewData bir sozluk ifadesidir. Key-Value pair tasir.(Kucuk yapidaki verileri gonderebiliriz.)
+ViewData=Controller'dan View'a ayni TempData'da oldugu gibi veri aktarmak uzere kullandigimiz yontemlerden biri

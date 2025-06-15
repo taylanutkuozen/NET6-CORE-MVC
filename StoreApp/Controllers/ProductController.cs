@@ -19,6 +19,7 @@ namespace StoreApp.Controllers
           public IActionResult Get([FromRoute(Name ="id")]int id) //request = http://localhost:5135/Product/Get/1
         {
             var model=_manager.ProductService.GetOneProduct(id,false);
+            ViewData["Title"] = model?.ProductName;
             return View(model);
         }
         public IActionResult Index(ProductRequestParameters productParameters)
@@ -36,16 +37,5 @@ namespace StoreApp.Controllers
                 Pagination=pagination
             });
         }
-        /*public IEnumerable<Product> Index()
-        {
-            var context = new RepositoryContext(
-                new DbContextOptionsBuilder<RepositoryContext>()
-                .UseSqlite("Data Source=C:\\Users\\utku.ozen\\source\\repos\\ASPNET Core MVC\\ProductDb.db")
-                .Options 
-            ); Dependency Injection sayesinde buradan kurtuluyoruz.
-            return new List<Product>()
-            {
-                new Product(){ProductID=1, ProductName="Computer", ProductPrice=5}
-            };*/
     }        
 }
